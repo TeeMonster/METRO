@@ -1,0 +1,17 @@
+C:\Documents and Settings\User\Рабочий стол\Kos-Ster\Triugolnik\Triugolnik\bin\Debug\Triugolnik.exe
+C:\Documents and Settings\User\Рабочий стол\Kos-Ster\Triugolnik\Triugolnik\bin\Debug\Triugolnik.pdb
+C:\Documents and Settings\User\Рабочий стол\Kos-Ster\Triugolnik\Triugolnik\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\User\Рабочий стол\Kos-Ster\Triugolnik\Triugolnik\obj\x86\Debug\Triugolnik.exe
+C:\Documents and Settings\User\Рабочий стол\Kos-Ster\Triugolnik\Triugolnik\obj\x86\Debug\Triugolnik.pdb
+C:\Users\Egor\Desktop\МЕТРОЛОГИЯ\Kos-Ster\Triugolnik\Triugolnik\obj\x86\Debug\Triugolnik.exe
+C:\Users\Egor\Desktop\МЕТРОЛОГИЯ\Kos-Ster\Triugolnik\Triugolnik\obj\x86\Debug\Triugolnik.pdb
+C:\Users\Egor\Documents\GitHub\mikpo\Triugolnik\Triugolnik\obj\x86\Debug\Triugolnik.exe
+C:\Users\Egor\Documents\GitHub\mikpo\Triugolnik\Triugolnik\obj\x86\Debug\Triugolnik.pdb
+C:\Users\Egor\Documents\GitHub\mikpo\Triugolnik\Triugolnik\bin\Debug\Triugolnik.exe
+C:\Users\Egor\Documents\GitHub\mikpo\Triugolnik\Triugolnik\bin\Debug\Triugolnik.pdb
+C:\Users\Egor\Documents\GitHub\mikpo\Triugolnik\Triugolnik\obj\x86\Debug\Triugolnik.csprojResolveAssemblyReference.cache
+C:\Users\HarrySt\Documents\GitHub\METRO\Triugolnik\Triugolnik\obj\x86\Debug\Triugolnik.exe
+C:\Users\HarrySt\Documents\GitHub\METRO\Triugolnik\Triugolnik\obj\x86\Debug\Triugolnik.pdb
+C:\Users\HarrySt\Documents\GitHub\METRO\Triugolnik\Triugolnik\bin\Debug\Triugolnik.exe
+C:\Users\HarrySt\Documents\GitHub\METRO\Triugolnik\Triugolnik\bin\Debug\Triugolnik.pdb
+C:\Users\HarrySt\Documents\GitHub\METRO\Triugolnik\Triugolnik\obj\x86\Debug\Triugolnik.csprojResolveAssemblyReference.cache

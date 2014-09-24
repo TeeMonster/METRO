@@ -1,0 +1,14 @@
+C:\Users\Egor\Documents\GitHub\mikpo\Triugolnik\Test1\bin\Debug\Test1.dll
+C:\Users\Egor\Documents\GitHub\mikpo\Triugolnik\Test1\bin\Debug\Test1.pdb
+C:\Users\Egor\Documents\GitHub\mikpo\Triugolnik\Test1\bin\Debug\Triugolnik.exe
+C:\Users\Egor\Documents\GitHub\mikpo\Triugolnik\Test1\bin\Debug\Triugolnik.pdb
+C:\Users\Egor\Documents\GitHub\mikpo\Triugolnik\Test1\obj\Debug\TriugolnikTest.csprojResolveAssemblyReference.cache
+C:\Users\Egor\Documents\GitHub\mikpo\Triugolnik\Test1\obj\Debug\Test1.dll
+C:\Users\Egor\Documents\GitHub\mikpo\Triugolnik\Test1\obj\Debug\Test1.pdb
+C:\Users\HarrySt\Documents\GitHub\METRO\Triugolnik\Test1\bin\Debug\Test1.dll
+C:\Users\HarrySt\Documents\GitHub\METRO\Triugolnik\Test1\bin\Debug\Test1.pdb
+C:\Users\HarrySt\Documents\GitHub\METRO\Triugolnik\Test1\bin\Debug\Triugolnik.exe
+C:\Users\HarrySt\Documents\GitHub\METRO\Triugolnik\Test1\bin\Debug\Triugolnik.pdb
+C:\Users\HarrySt\Documents\GitHub\METRO\Triugolnik\Test1\obj\Debug\TriugolnikTest.csprojResolveAssemblyReference.cache
+C:\Users\HarrySt\Documents\GitHub\METRO\Triugolnik\Test1\obj\Debug\Test1.dll
+C:\Users\HarrySt\Documents\GitHub\METRO\Triugolnik\Test1\obj\Debug\Test1.pdb
