@@ -1,0 +1,6 @@
+C:\Users\HarrySt\Documents\GitHub\METRO\FiltrFinal\FiltrFinal\bin\Debug\FiltrFinal.exe.config
+C:\Users\HarrySt\Documents\GitHub\METRO\FiltrFinal\FiltrFinal\bin\Debug\FiltrFinal.exe
+C:\Users\HarrySt\Documents\GitHub\METRO\FiltrFinal\FiltrFinal\bin\Debug\FiltrFinal.pdb
+C:\Users\HarrySt\Documents\GitHub\METRO\FiltrFinal\FiltrFinal\obj\Debug\FiltrFinal.csprojResolveAssemblyReference.cache
+C:\Users\HarrySt\Documents\GitHub\METRO\FiltrFinal\FiltrFinal\obj\Debug\FiltrFinal.exe
+C:\Users\HarrySt\Documents\GitHub\METRO\FiltrFinal\FiltrFinal\obj\Debug\FiltrFinal.pdb
