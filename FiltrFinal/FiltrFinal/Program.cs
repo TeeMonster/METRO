@@ -19,9 +19,8 @@ namespace FiltrFinal
         public class Obertka
         {
             //проверять размер картинки
-            public byte[] Filtr(ref byte[] inmass, int iheight, int iwidth, bool normtype)
+            public byte[] Filtr(byte[] inmass, int iheight, int iwidth, bool normtype)
             {
-                object b;
                 int[] intrgb = new int[inmass.Length / 3];
                 if (!normtype)
                 {
@@ -31,7 +30,6 @@ namespace FiltrFinal
                         intrgb[i / 3] = Color.FromArgb(inmass[i+2], inmass[i +1], inmass[i]).ToArgb();
                     }
                 }
-                int[] tmpmass = new int[9];
                 byte[] outmass = new byte[inmass.Length];
                 //заполняем края картинки
                 if (normtype)
@@ -68,34 +66,38 @@ namespace FiltrFinal
                         }
                     }
                 }
-                for (int i = 0; i < iwidth - 2; i++)
-                    for (int j = 0; j < iheight - 2; j++)
+                //for (int i = 0; i < iwidth - 2; i++)
+                Parallel.For(0, iwidth - 2, i =>
                     {
-                        for (int i1 = 0; i1 < 3; i1++)
-                            for (int j1 = 0; j1 < 3; j1++)
+                        int[] tmpmass = new int[9];
+                        object b;
+                        for (int j = 0; j < iheight - 2; j++)
+                        {
+                            for (int i1 = 0; i1 < 3; i1++)
+                                for (int j1 = 0; j1 < 3; j1++)
+                                {
+                                    if (normtype)
+                                    {
+                                        tmpmass[i1 * 3 + j1] = inmass[i + j1 + (i1 + j) * iwidth]; //для байтов
+                                    }
+                                    else
+                                    {
+                                        tmpmass[i1 * 3 + j1] = intrgb[i + j1 + (i1 + j) * iwidth]; //для цветов
+                                    }
+                                }
+                            b = GetB(tmpmass);
+                            if (normtype)
                             {
-                                if (normtype)
-                                {
-                                    tmpmass[i1 * 3 + j1] = inmass[i + j1 + (i1 + j) * iwidth]; //для байтов
-                                }
-                                else
-                                {
-                                    tmpmass[i1 * 3 + j1] = intrgb[i + j1 + (i1 + j) * iwidth]; //для цветов
-                                }
+                                outmass[(i + 1) + (j + 1) * iwidth] = Convert.ToByte(b); //для байтов
                             }
-                        b = GetB(tmpmass);
-                        if (normtype)
-                        {
-                            outmass[(i + 1) + (j + 1) * iwidth] = Convert.ToByte(b); //для байтов
+                            else
+                            {
+                                outmass[(i + 1) * 3 + (j + 1) * iwidth * 3] = Color.FromArgb((int)b).B; //для цветов
+                                outmass[(i + 1) * 3 + (j + 1) * iwidth * 3 + 1] = Color.FromArgb((int)b).G; //для цветов
+                                outmass[(i + 1) * 3 + (j + 1) * iwidth * 3 + 2] = Color.FromArgb((int)b).R; //для цветов
+                            }
                         }
-                        else
-                        {
-                            outmass[(i + 1) * 3 + (j + 1) * iwidth * 3] = Color.FromArgb((int)b).B; //для цветов
-                            outmass[(i + 1) * 3 + (j + 1) * iwidth * 3 + 1] = Color.FromArgb((int)b).G; //для цветов
-                            outmass[(i + 1) * 3 + (j + 1) * iwidth * 3 + 2] = Color.FromArgb((int)b).R; //для цветов
-                        }
-
-                    }
+                    });
                 return outmass;
             }
             object GetB(int[] inb)
@@ -142,7 +144,10 @@ namespace FiltrFinal
             byte[] inrgb = new byte[lengthrgb];
             Marshal.Copy(ptr, inrgb, 0, lengthrgb);
             Obertka ob = new Obertka();
-            inrgb=ob.Filtr(ref inrgb,bmp.Height, bmp.Width,false);
+            DateTime dd = DateTime.Now;
+            inrgb=ob.Filtr(inrgb,bmp.Height, bmp.Width,false);
+            TimeSpan ts = DateTime.Now - dd;
+            Console.WriteLine(ts.ToString());
             Marshal.Copy(inrgb, 0, ptr, lengthrgb);
             bmp.UnlockBits(bmpd);
             //bmp.Save("2.jpg");
