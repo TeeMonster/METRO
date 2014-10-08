@@ -108,7 +108,7 @@ namespace Triugolnik
 
                                                 if (File.Exists(fileOutput))
                                                 {
-                                                    fileOut.WriteLine("A=" + a.ToString() + " B=" + b.ToString() + " C=" + c.ToString());
+                                                    fileOut.WriteLine(a.ToString() + ";" + b.ToString() + ";" + c.ToString());
                                                     Console.WriteLine("Номер строки: " + countString.ToString() + " Сторона А=" + a.ToString() + " сторона B=" + b.ToString() + " сторона C=" + c.ToString() + ", углы Alpha=" + alpha.ToString() + " Betta=" + betta.ToString() + " Gamma=" + gamma.ToString());
                                                 }
                                                 else
