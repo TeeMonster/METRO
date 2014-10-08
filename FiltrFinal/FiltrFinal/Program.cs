@@ -18,15 +18,14 @@ namespace FiltrFinal
     {
         public class Obertka
         {
-            //проверять размер картинки
             public byte[] Filtr(byte[] inmass, int iheight, int iwidth, bool normtype)
             {
                 int[] intrgb = new int[inmass.Length / 3];
+                //если картинка формата 24
                 if (!normtype)
                 {
-                    for (Int64 i = 0; i < inmass.Length; i += 3)
+                    for (Int64 i = 0; i < inmass.Length/3*3; i += 3)
                     {
-                        //intrgb[i / 3] = Color.FromArgb(inmass[i], inmass[i + 1], inmass[i+2]).ToArgb();
                         intrgb[i / 3] = Color.FromArgb(inmass[i+2], inmass[i +1], inmass[i]).ToArgb();
                     }
                 }
@@ -66,9 +65,12 @@ namespace FiltrFinal
                         }
                     }
                 }
-                //for (int i = 0; i < iwidth - 2; i++)
-                Parallel.For(0, iwidth - 2, i =>
+                Parallel.For(0,3,i2=>
                     {
+                        int istart=i2*iwidth/3,ifinish=i2*iwidth/3+iwidth/3;
+                        if (ifinish > iwidth - 2) ifinish = iwidth - 2;
+                        for (int i=istart; i<ifinish;i++)
+                        {
                         int[] tmpmass = new int[9];
                         object b;
                         for (int j = 0; j < iheight - 2; j++)
@@ -97,6 +99,7 @@ namespace FiltrFinal
                                 outmass[(i + 1) * 3 + (j + 1) * iwidth * 3 + 2] = Color.FromArgb((int)b).R; //для цветов
                             }
                         }
+                       }
                     });
                 return outmass;
             }
@@ -109,50 +112,61 @@ namespace FiltrFinal
 
         static void Main(string[] args)
         {
-            //в крайний случай
-            /* 
-             * BitmapData bmpd = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
-             * насильно указываем что формат байт на пиксель, но тогда дикое мыльцо, если картиника не такого формата PixelFormat
-             * можно сделать, если у нас PixelFormat не поддерживается, ибо их много, то использовтаь этот "пожарный" вариант
-             * потестить принудительное сохранение в bmp и потом работа с ним
-             */
-            //Bitmap bmp = new Bitmap("pic12.bmp");
-            //Bitmap bmp=new Bitmap("1.bmp");
-            //BitmapData bmpd1 = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
-            //bmp.UnlockBits(bmpd1);
-            //bmp.Save("test.bmp");
-            //Bitmap bmp = new Bitmap("test.bmp");
-            //Console.WriteLine(bmp1.PixelFormat.ToString());
-            //Console.ReadLine();
-            //Bitmap bmp = new Bitmap("1.jpg");
-            //bmp2.Save("test.bmp", ImageFormat.Bmp);
-            //Bitmap bmp22 = new Bitmap("test.bmp");
-             //Console.WriteLine(bmp22.PixelFormat.ToString());
-             //Console.ReadLine();
-            //Bitmap  bmp = new Bitmap("MFExample.jpg");
-             //Console.WriteLine(bmp3.PixelFormat.ToString());
-            Bitmap bmp = new Bitmap("pic12.jpg");
-             //Console.WriteLine(bmp4.PixelFormat.ToString());
-            //Console.ReadLine();
-            Console.WriteLine(bmp.PixelFormat.ToString());
-            Console.WriteLine(bmp.Width);
-            Console.WriteLine(bmp.Height);
+            if (args.Length != 2)
+            {
+                Console.WriteLine("Arguments error");
+                Console.ReadLine();
+                Environment.Exit(0);
+            }
+            if (!File.Exists(args[0]))
+            {
+                Console.WriteLine("File not found");
+                Console.ReadLine();
+                Environment.Exit(0);
+            }
+            Bitmap bmp = new Bitmap(args[0]);
+            if (!(bmp.PixelFormat == PixelFormat.Format8bppIndexed || bmp.PixelFormat == PixelFormat.Format24bppRgb))
+            {
+                Console.WriteLine(bmp.PixelFormat.ToString() + " not supported. Let's try PixelFormat 8 or 24 bits");
+                Console.ReadLine();
+                Environment.Exit(0);
+            }
+            if (bmp.Width < 3 || bmp.Height < 3) 
+            {
+                Console.WriteLine("Picture is small");
+                Console.ReadLine();
+                Environment.Exit(0);
+            }
             BitmapData bmpd = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadWrite, bmp.PixelFormat);
             IntPtr ptr = bmpd.Scan0;
-            //проверять bmpd.Stride если не равно ширине то делать версию с *3, иначе воспринимать как байты
-            int lengthrgb=bmpd.Stride * bmp.Height;
+            int lengthrgb = bmpd.Stride * bmp.Height;
             byte[] inrgb = new byte[lengthrgb];
             Marshal.Copy(ptr, inrgb, 0, lengthrgb);
             Obertka ob = new Obertka();
-            DateTime dd = DateTime.Now;
-            inrgb=ob.Filtr(inrgb,bmp.Height, bmp.Width,false);
-            TimeSpan ts = DateTime.Now - dd;
-            Console.WriteLine(ts.ToString());
+            inrgb = ob.Filtr(inrgb, bmp.Height, bmp.Width, (bmp.PixelFormat==PixelFormat.Format8bppIndexed));
             Marshal.Copy(inrgb, 0, ptr, lengthrgb);
             bmp.UnlockBits(bmpd);
-            //bmp.Save("2.jpg");
-            bmp.Save("pic121.jpg", ImageFormat.Jpeg);
-            Console.WriteLine(inrgb.Length);
+            string[] s = args[1].Split('.');
+            string format = s[s.Length-1].ToUpper();
+            if (format=="JPG"||format=="JPEG")
+            {
+                bmp.Save(args[1], ImageFormat.Jpeg);
+            }
+            else
+                if (format=="BMP")
+                {
+                    bmp.Save(args[1], ImageFormat.Bmp);
+                }
+            else
+                    if (format == "PNG")
+                    {
+                        bmp.Save(args[1], ImageFormat.Png);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Format not supported. Save as JPEG");
+                        bmp.Save(args[1], ImageFormat.Jpeg);
+                    }
             Console.ReadLine();
         }
     }
